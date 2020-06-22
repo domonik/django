@@ -1,0 +1,64 @@
+<script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
+<script>
+    function downloadText() {
+        var content = document.getElementById("predicted-text").innerHTML
+        content = content.replace(/<br>/gi, "\n" )
+        content = content.replace(/<p>/gi, "" )
+        alert(content)
+        var filename = "Lyrics.txt";
+        var blob = new Blob([content], {
+            type: "text/plain;charset=utf-8"
+        });
+        saveAs(blob, filename)
+    }
+</script>
+
+{% extends 'headerPage.html' %}
+
+{% block content%}
+
+<div class=page-container>
+    <h2>Input your Text</h2>
+
+    
+    <br>
+
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'predictText' %}">
+  
+ {% csrf_token %}
+ <div class="text-input"><label for="text-input"></label>
+     <br>
+        <input name="text" type="text" id="text-input" required><br><br>
+ <br>
+
+ 
+    <input type="submit" value="Write Text" ></div>
+
+    
+
+    
+</form>
+{% if predicted_text != None %}
+<h2>Rap Song </h2>
+        <div class="predicted-text" id="predicted-text"> {{predicted_text|linebreaks}} </div>
+
+<br>
+
+<div class="download-button">
+    <input name="download" type="submit" value="Download" onclick="downloadText()">
+</div>
+{% if request.user.is_authenticated %}
+<form method="POST" enctype="multipart/form-data" action="saveLyrics">
+    {% csrf_token %}
+    <input type="text" name="title" id="lyrics-title" required>
+    <input type="hidden" name="lyrics" value="{{predicted_text}}" />
+    <input type="submit" value="Save Lyrics">
+</form>
+{% endif %}
+{% endif %}
+</div>
+
+{% endblock %}
+
+

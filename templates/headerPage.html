@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <title>German Rap Song Prediciton</title>
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="Tooplate">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+
+</head>
+<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+     <div class="container">
+     <!-- MENU -->
+     <header>
+
+     <div class="navbar">
+          <!-- MENU LINKS -->
+          <div class="collapse navbar-left">
+               <ul class="nav navbar-nav">
+                    <li><a href="/" class="smoothScroll">Home</a></li>
+                    <li><a href="/" class="smoothScroll">DRap</a></li>                 
+
+
+               </ul>
+          </div>
+          <div class="navbar-right">
+               {% if request.user.is_authenticated %}
+                    <ul>
+                         <li><span>Hello {{request.user}}</span></li>
+                         <li><a id="logout-btn" href="{% url 'logout' %}"> Logout </a></li>
+                    </ul>
+               {% endif %}
+               {% if not request.user.is_authenticated %}
+                    <ul>
+                         <li><a id="login-btn" href="{% url 'login' %}"> Login </a></li>
+                    </ul>
+               {% endif %}
+          </div>
+          
+
+     </div>
+
+</header>
+</div>
+
+
+     <!-- HOME -->
+
+
+<div class="container">
+     {% block content%}
+     {% endblock %}
+
+</div>
+
+     <!-- FOOTER -->
+     
+     <footer data-stellar-background-ratio="5">
+          <div class="footer">
+               <div class="footer-contact">
+                    <a href= "mailto:dominik.rabsch@gmail.com">dominik.rabsch@gmail.com</a>
+               </div>
+               <a href= "https://github.com/IngomitFlamingo" target="_blank"><img src="{% static "media/github.svg" %}"/></a>
+               
+          </div>
+     </footer>
+
+     <!-- SCRIPTS -->
+     
+
+</body>
+</html>
