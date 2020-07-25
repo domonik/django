@@ -101,7 +101,8 @@ h2 {
 }
 
 .predicted-text {
-    width: 90%;
+    
+    width: 80%;
     margin-left: auto;
     padding-bottom: 1em;
 }

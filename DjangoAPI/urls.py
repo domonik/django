@@ -22,7 +22,8 @@ from MyAPI import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('^$', views.index, name="homepage"),
+    url('^$', views.home, name="homepage"),
+    url('germanRap', views.index, name="germanRap"),
     url('predictText', views.predictText, name="predictText"),
     url('saveLyrics', views.saveLyrics, name="saveLyrics"),
     path("", include("accounts.urls"))

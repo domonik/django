@@ -35,10 +35,17 @@
  
     <input type="submit" value="Write Text" ></div>
 
-    
+   
 
     
 </form>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% if predicted_text != None %}
 <h2>Rap Song </h2>
         <div class="predicted-text" id="predicted-text"> {{predicted_text|linebreaks}} </div>
