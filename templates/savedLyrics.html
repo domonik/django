@@ -1,0 +1,27 @@
+{% extends 'headerPage.html' %}
+{% load static %}
+{% block content %}
+
+<div class=page-container>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Lyrics Preview</th>
+        </tr>
+        
+        {% for lyric in lyrics %}
+            <tr>
+                <td><a class="lyrics-link" href="/lyrics/?id={{ lyric.id }}">{{lyric.title}}</a></td>
+                <td>{{lyric.author}}</td>
+                <td>{{lyric.preview|linebreaks}}</td>
+            </tr>
+        {% endfor %}
+        
+        
+
+    </table>
+</div>
+
+{% endblock %}
+

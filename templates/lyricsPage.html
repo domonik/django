@@ -1,0 +1,16 @@
+{% extends 'headerPage.html' %}
+{% load static %}
+{% block content %}
+
+<div class=page-container>
+    {% for message in messages %}
+        <p>{{message}}</p>
+    {% endfor %}
+    {% if lyric is not None %}
+        <h1>{{lyric.title}}</h1>
+        <p>{{lyric.lyrics|linebreaks}}</p>
+    {% endif %}
+</div>
+
+{% endblock %}
+

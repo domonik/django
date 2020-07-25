@@ -35,6 +35,7 @@
                {% if request.user.is_authenticated %}
                     <ul>
                          <li><span>Hello {{request.user}}</span></li>
+                         <li><a id="my-lyrics" href="{% url 'savedLyrics' %}"> My Lyrics</a></li>
                          <li><a id="logout-btn" href="{% url 'logout' %}"> Logout </a></li>
                     </ul>
                {% endif %}

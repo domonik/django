@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from MyAPI.models import Lyrics
 
 
 # Create your views here.
@@ -45,8 +46,23 @@ def logoutUser(request):
     logout(request)
     return redirect("login")
 
-def savedSongsPage(request):
-    if not user.is_authenticated: 
+def savedLyricsPage(request):
+    if not request.user.is_authenticated: 
         return redirect("homepage")
     else:
-        return render(request, "savedSongs.html")
+
+        lyrics = Lyrics.objects.all().filter(author=request.user.username)
+        for lyric in lyrics:
+            lyric.preview = lyric.lyrics.split("\n")[0] 
+        context = {"lyrics": lyrics}
+        return render(request, "savedLyrics.html", context)
+
+def lyricsPage(request):
+    id = request.GET.get("id")
+    lyric = Lyrics.objects.get(id=id)
+    if lyric.author == request.user.username:
+        context = {"lyric": lyric}
+    else:
+        messages.info(request, "These Lyrics were created by another user")
+        context = {"lyric": None}
+    return render(request, "lyricsPage.html", context)

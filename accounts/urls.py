@@ -8,6 +8,8 @@ from accounts import views
 urlpatterns = [
     url('login', views.loginPage, name="login"),
     url('register', views.registerPage, name="register"),
-    url('logout', views.logoutUser, name="logout")
+    url('logout', views.logoutUser, name="logout"),
+    url('savedLyrics', views.savedLyricsPage, name="savedLyrics"),
+    url('lyrics', views.lyricsPage, name="lyrics")
     
 ]
